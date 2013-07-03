@@ -9,7 +9,7 @@ person/piqi_pb2.py: person.piqi.proto
 	protoc --python_out=. $<
 
 person/__init__.py: person/piqi_pb2.py
-	touch person/__init__.py
+	touch $@
 
 person.piqi.proto: person.piqi
 	piqi to-proto $<

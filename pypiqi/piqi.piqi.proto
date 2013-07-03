@@ -1,0 +1,147 @@
+package piqi_org.piqi;
+
+
+message piqi_typedef {
+    optional record record = 502036113;
+    optional variant variant = 484589701;
+    optional piqi_enum piqi_enum = 51800833;
+    optional alias alias = 26300816;
+    optional list list = 129178718;
+}
+
+enum piqi_type {
+    piqi_type_int = 5246191;
+    piqi_type_float = 43435420;
+    piqi_type_bool = 18580522;
+    piqi_type_string = 288368849;
+    piqi_type_binary = 218872833;
+    piqi_type_any = 4848364;
+}
+
+message record {
+    required string name = 150958667;
+    repeated field field = 9671866;
+    optional string protobuf_name = 90072013;
+    repeated string protobuf_custom = 112352691;
+    optional string json_name = 515275216;
+}
+
+message field {
+    optional string name = 150958667;
+    optional string type = 218690234;
+    optional field_mode mode = 140563299 [default = required];
+    optional any default = 465819841;
+    optional bool deprecated = 69402483;
+    optional piq_format piq_format = 296833484;
+    optional string protobuf_name = 90072013;
+    optional sint32 code = 29667629;
+    optional bool protobuf_packed = 179842426;
+    optional string json_name = 515275216;
+    optional string getopt_letter = 215188758;
+    optional string getopt_doc = 442330184;
+}
+
+enum field_mode {
+    required = 308449631;
+    optional = 510570400;
+    repeated = 274054266;
+}
+
+message variant {
+    required string name = 150958667;
+    repeated option option = 192598901;
+    optional string protobuf_name = 90072013;
+    repeated string protobuf_custom = 112352691;
+    optional string json_name = 515275216;
+}
+
+message option {
+    optional string name = 150958667;
+    optional string type = 218690234;
+    optional bool deprecated = 69402483;
+    optional piq_format piq_format = 296833484;
+    optional string protobuf_name = 90072013;
+    optional sint32 code = 29667629;
+    optional string json_name = 515275216;
+    optional string getopt_letter = 215188758;
+    optional string getopt_doc = 442330184;
+}
+
+message piqi_enum {
+    required string name = 150958667;
+    repeated option option = 192598901;
+    optional string protobuf_name = 90072013;
+    repeated string protobuf_custom = 112352691;
+    optional string protobuf_prefix = 366391188;
+    optional string json_name = 515275216;
+}
+
+message alias {
+    required string name = 150958667;
+    optional string type = 218690234;
+    optional piqi_type piqi_type = 198318774;
+    optional piq_format piq_format = 296833484;
+    optional string protobuf_name = 90072013;
+    optional string protobuf_type = 157803580;
+    optional protobuf_wire_type protobuf_wire_type = 198202944;
+    optional string json_name = 515275216;
+}
+
+message list {
+    required string name = 150958667;
+    required string type = 218690234;
+    optional piq_format piq_format = 296833484;
+    optional string protobuf_name = 90072013;
+    repeated string protobuf_custom = 112352691;
+    optional bool protobuf_packed = 179842426;
+    optional string json_name = 515275216;
+}
+
+message piqi {
+    optional string module = 13841580;
+    repeated piqi_typedef piqi_typedef = 416823115;
+    repeated import import = 142778725;
+    repeated function function = 340962072;
+    repeated string protobuf_custom = 112352691;
+    optional string protobuf_package = 376215364;
+}
+
+message import {
+    required string module = 13841580;
+    optional string name = 150958667;
+}
+
+message any {
+    optional string type = 218690234;
+    optional bytes protobuf = 6461771;
+    optional string json = 107495976;
+    optional string xml = 5991895;
+}
+
+message function {
+    required string name = 150958667;
+    optional string input = 505267210;
+    optional string output = 209784577;
+    optional string error = 321506248;
+}
+
+message piqi_list {
+    repeated piqi piqi = 1;
+}
+
+message piq_format {
+    optional bool word = 251462090;
+    optional bool text = 217697453;
+}
+
+enum protobuf_wire_type {
+    varint = 329594984;
+    zigzag_varint = 99211597;
+    fixed32 = 136997651;
+    fixed64 = 136998322;
+    signed_varint = 441915897;
+    signed_fixed32 = 488499298;
+    signed_fixed64 = 488499969;
+    block = 352089421;
+}
+
