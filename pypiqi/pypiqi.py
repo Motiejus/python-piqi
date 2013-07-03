@@ -1,11 +1,10 @@
 
 import json as json_mod
-
 import subprocess
 import struct
 
 from piqi_tools.piqi_pb2 import convert_input
-from piqi_tools.piqi_pb2 import json, pb, xml
+from piqi_tools.piqi_pb2 import json, pb, xml, piq
 
 class piqi(object):
 
@@ -35,10 +34,21 @@ class piqi(object):
         return self._server.stdout.read(len2)
 
 
-    def generate(self, obj, output_format, json_omit_null_fields=True,
+    def generate(self, obj, output_fmt_str, json_omit_null_fields=True,
             pretty_print=True, use_strict_parsing=True):
         self._add_to_piqi(obj)
         inp = convert_input()
+
+        if output_fmt_str == "json":
+            output_fmt = json
+        elif output_fmt_str == "pb":
+            output_fmt = pb
+        elif output_fmt_str == "xml":
+            output_fmt = xml
+        elif output_fmt_str == "piq":
+            output_fmt = piq
+        else:
+            raise ValueError("bad output format: %s" % output_fmt_str)
 
         inp.data = obj.SerializeToString()
         inp.input_format = pb

@@ -1,21 +1,22 @@
 
-.INTERMEDIATE: person.piqi.proto
-
 .PHONY: all clean test
 
-all: person/piqi_pb2.py person/__init__.py
+all: gen/person/piqi_pb2.py gen/person/__init__.py gen/person.piqi.pb
 
-person/piqi_pb2.py: person.piqi.proto
+gen/person/piqi_pb2.py: gen/person.piqi.proto $(GEN)
 	protoc --python_out=. $<
 
-person/__init__.py: person/piqi_pb2.py
+gen/person/__init__.py: gen/person/piqi_pb2.py
 	touch $@
 
-person.piqi.proto: person.piqi
-	piqi to-proto $<
+gen/person.piqi.proto: person.piqi
+	piqi to-proto $< -o $@
+
+gen/person.piqi.pb: person.piqi
+	piqi convert person.piqi -f piqi -t pb -o gen/person.piqi.pb
 
 clean: 
-	rm -fr person *.pyc
+	rm -fr gen/person gen/person.piqi.pb gen/person.piqi.proto *.pyc
 
 test: all
 	python -m unittest pypiqi_test

@@ -1,3 +1,5 @@
-/pypiqi/gen
-/pypiqi/tests/person
+/pypiqi/gen/*
+!/pypiqi/gen/__init__.py
+/pypiqi/tests/gen/*
+!/pypiqi/tests/gen/__init__.py
 *.py[oc]
