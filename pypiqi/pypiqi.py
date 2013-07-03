@@ -3,8 +3,8 @@ import json as json_mod
 import subprocess
 import struct
 
-from piqi_tools.piqi_pb2 import convert_input
-from piqi_tools.piqi_pb2 import json, pb, xml, piq
+from gen.piqi_tools.piqi_pb2 import convert_input, json, pb, xml, piq
+#from gen.piqi.piqi_pb2 import
 
 class piqi(object):
 

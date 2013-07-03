@@ -100,13 +100,13 @@ message list {
 message piqi {
     optional string module = 13841580;
     repeated piqi_typedef piqi_typedef = 416823115;
-    repeated import import = 142778725;
+    repeated py_import py_import = 142778725;
     repeated function function = 340962072;
     repeated string protobuf_custom = 112352691;
     optional string protobuf_package = 376215364;
 }
 
-message import {
+message py_import {
     required string module = 13841580;
     optional string name = 150958667;
 }

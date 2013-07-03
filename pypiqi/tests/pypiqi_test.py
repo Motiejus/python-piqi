@@ -1,14 +1,12 @@
 import sys
 import json
 
-sys.path.append("../")
-
 from unittest import TestCase
 
-import pypiqi
+from pypiqi import pypiqi
 
-from person.piqi_pb2 import person, phone_number
-from person.piqi_pb2 import home, mobile, work
+from pypiqi.tests.gen.person.piqi_pb2 import (person,
+        phone_number, home, mobile, work)
 
 
 class PersonTest(TestCase):
@@ -19,7 +17,7 @@ class PersonTest(TestCase):
         del self.piqi
 
     def test_encode_json(self):
-        js = self.piqi.generate(example_person(), pypiqi.json)
+        js = self.piqi.generate(example_person(), "json")
         self.assertEqual(example_person_obj(), json.loads(js))
 
     def test_decode_json(self):
