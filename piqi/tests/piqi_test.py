@@ -3,15 +3,15 @@ import json
 
 from unittest import TestCase
 
-from pypiqi import pypiqi
+from piqi import piqi
 
-from pypiqi.tests.gen.person.piqi_pb2 import (person,
+from piqi.tests.gen.person.piqi_pb2 import (person,
         phone_number, home, mobile, work)
 
 
 class PersonTest(TestCase):
     def setUp(self):
-        self.piqi = pypiqi.piqi()
+        self.piqi = piqi.piqi()
 
     def tearDown(self):
         del self.piqi

@@ -1,5 +1,5 @@
-/pypiqi/gen/*
-!/pypiqi/gen/__init__.py
-/pypiqi/tests/gen/*
-!/pypiqi/tests/gen/__init__.py
+/piqi/gen/*
+!/piqi/gen/__init__.py
+/piqi/tests/gen/*
+!/piqi/tests/gen/__init__.py
 *.py[oc]

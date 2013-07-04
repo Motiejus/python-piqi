@@ -19,4 +19,4 @@ clean:
 	rm -fr gen/person gen/person.piqi.pb gen/person.piqi.proto *.pyc
 
 test: all
-	python -m unittest pypiqi_test
+	python -m unittest piqi_test
