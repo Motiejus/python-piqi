@@ -17,14 +17,15 @@ class PersonTest(TestCase):
         del self.piqi
 
     def test_encode_json(self):
-        js = self.piqi.generate(example_person(), "json")
+        p = example_person()
+        js = p.SerializeToJson(self.piqi)
         self.assertEqual(example_person_obj(), json.loads(js))
 
     def test_decode_json(self):
-        pass
-        #js = json.dumps(example_person_obj())
-        #p1 = self.piqi.parse(p1, pypiqi.json)
-        #self.assertEqual(example_person_obj(), p1)
+        js = json.dumps(example_person_obj())
+        p1 = person()
+        p1 = person.ParseFromJson(self.piqi, js)
+        self.assertEqual(example_person_obj(), p1)
 
 
 def example_person():
