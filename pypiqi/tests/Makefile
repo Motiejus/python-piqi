@@ -9,7 +9,7 @@ gen/person/piqi_pb2.py: gen/person.piqi.proto $(GEN)
 gen/person/__init__.py: gen/person/piqi_pb2.py
 	touch $@
 
-gen/person.piqi.proto: person.piqi
+gen/person.piqi.proto: person.piqi gen/person.piqi.pb
 	piqi to-proto $< -o $@
 
 gen/person.piqi.pb: person.piqi
