@@ -4,7 +4,7 @@
 all: gen/person/piqi_pb2.py gen/person/__init__.py gen/person.piqi.pb
 
 gen/person/piqi_pb2.py: gen/person.piqi.proto $(GEN)
-	protoc --python_out=. $<
+	protoc --python_out=. --person_out=. --plugin=../protoc-gen-person $<
 
 gen/person/__init__.py: gen/person/piqi_pb2.py
 	touch $@

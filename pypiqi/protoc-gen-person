@@ -1,0 +1,29 @@
+#!/usr/bin/env python
+
+import sys
+import os
+
+# Issue 529: google/protobuf/compiler/__init__.py is missing.
+# Until it is fixed, we need to help Python import plugin_pb2.
+try:
+    from google.protobuf.compiler.plugin_pb2 import CodeGeneratorRequest, \
+            CodeGeneratorResponse
+except ImportError:
+    import google.protobuf
+    sys.path.append(os.path.join(google.protobuf.__path__[0], "compiler"))
+    from plugin_pb2 import CodeGeneratorRequest, CodeGeneratorResponse
+
+
+serialized = sys.stdin.read()
+req = CodeGeneratorRequest()
+req.ParseFromString(serialized)
+
+resp = CodeGeneratorResponse()
+
+for protofile in req.proto_file:
+    f = resp.file.add()
+    f.name = "gen/person/piqi_pb2.py"
+    f.insertion_point = "module_scope"
+    f.content = 'bac="ZAC"'
+
+sys.stdout.write(resp.SerializeToString())
