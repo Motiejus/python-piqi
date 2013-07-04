@@ -16,11 +16,15 @@ class piqi(object):
     def __del__(self):
         self._server.kill()
 
-    def _add_to_piqi(self):
-        """Send protobuf-encoded piqi specification to server"""
-        pass
+    @staticmethod
+    def _encode_rpc_request(name, bininput):
 
-    def send_and_receive(self, packet):
+
+    def _add_to_piqi(self, obj):
+        """Send protobuf-encoded piqi specification to server"""
+        self._send(obj._piqi_defn_pb)
+
+    def _send_and_receive(self, packet):
         length = struct.pack(">I", len(packet))
         writable = length + packet
         print(''.join(["\\x%02X" % ord(x) for x in writable]))

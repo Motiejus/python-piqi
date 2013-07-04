@@ -2,6 +2,7 @@
 
 import sys
 import os
+import re
 
 # Issue 529: google/protobuf/compiler/__init__.py is missing.
 # Until it is fixed, we need to help Python import plugin_pb2.
@@ -21,9 +22,16 @@ req.ParseFromString(serialized)
 resp = CodeGeneratorResponse()
 
 for protofile in req.proto_file:
-    f = resp.file.add()
-    f.name = "gen/person/piqi_pb2.py"
-    f.insertion_point = "module_scope"
-    f.content = 'bac="ZAC"'
+    insert = resp.file.add()
+    fnparts = re.match("gen/(\w+).(\w+).proto", protofile.name).groups()
+    if fnparts is not None:
+        insert.name = "gen/%s/%s_pb2.py" % fnparts
+    else:
+        raise RuntimeError("Impossible to construct filename")
+    insert.insertion_point = "module_scope"
+    pbfn = "gen/%s.%s.pb" % fnparts
+    with open(pbfn, 'r') as pbf:
+        pb = pbf.read()
+    insert.content = "_piqi_defn_pb=%s" % repr(pb)
 
 sys.stdout.write(resp.SerializeToString())
